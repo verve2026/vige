@@ -121,13 +121,9 @@ footer { border-top:1px solid var(--ink); padding:22px 0 40px; font-size:13px; c
       <ol class="steps">
         <li><div class="num">1</div><h3>Download</h3><p>Press Download for Mac and wait for <b>VIGE-mac-arm64.dmg</b> to finish.</p></li>
         <li><div class="num">2</div><h3>Drag to Applications</h3><p>Open the downloaded file and drag VIGE onto the Applications folder next to it.</p></li>
-        <li><div class="num">3</div><h3>Run setup once</h3><p>Open the Terminal app, paste the command below and press Return. It adds the tools and speech model VIGE needs to make videos, then opens the app.</p></li>
+        <li><div class="num">3</div><h3>Open VIGE and finish setup</h3><p>Open VIGE, create your account, and press <b>Set up everything</b> when it asks. VIGE downloads what it needs to make videos by itself.</p></li>
       </ol>
-      <div class="cmd">
-        <code id="cmd">curl -fsSL https://verve2026.github.io/vige/install.sh | bash -s -- --setup-only</code>
-        <button class="copy" id="copy" type="button">Copy</button>
-      </div>
-      <p class="note">Setup downloads the 1.6 GB speech model once and adds ffmpeg and whisper through Homebrew, so the first run takes a while. It never asks for your Mac password.</p>
+      <p class="note">Setup downloads the 1.6 GB speech model once and adds FFmpeg and Whisper through Homebrew, so the first time takes a while. VIGE tells you if Homebrew, Google Chrome or Claude Code still need installing, with a button for each. It never asks for your Mac password.</p>
     </section>
 
     <section>
@@ -147,8 +143,12 @@ footer { border-top:1px solid var(--ink); padding:22px 0 40px; font-size:13px; c
         <p>Yes. VIGE is signed with an Apple Developer ID and checked by Apple (notarized), so macOS opens it without a warning. The first time, macOS asks once whether to open an app downloaded from the internet; press Open.</p>
       </details>
       <details>
-        <summary>Do I have to run the setup command?</summary>
-        <p>Yes, once per Mac. VIGE opens without it, but it cannot cut videos or write subtitles until ffmpeg, whisper and the speech model are installed. Settings &gt; Setup check in the app shows what is missing.</p>
+        <summary>Can I do the setup from Terminal instead?</summary>
+        <p>Yes. After dragging VIGE into Applications, paste this in Terminal. It does the same setup as the button in the app.</p>
+        <div class="cmd">
+          <code id="cmd">curl -fsSL https://verve2026.github.io/vige/install.sh | bash -s -- --setup-only</code>
+          <button class="copy" id="copy" type="button">Copy</button>
+        </div>
       </details>
       <details>
         <summary>Can I install with one command instead?</summary>
