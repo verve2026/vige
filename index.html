@@ -51,6 +51,8 @@ h2 { margin:0 0 26px; font-weight:900; font-size:clamp(26px,3.6vw,40px); letter-
 .cmd code { flex:1; min-width:0; padding:18px 22px; font:500 14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; overflow-x:auto; white-space:nowrap; }
 .copy { flex:none; border:0; background:var(--orange); color:var(--ink); font:800 14px var(--font); padding:0 24px; cursor:pointer; }
 .copy:hover { background:var(--ground); }
+.warn { margin:14px 0 0; display:flex; gap:12px; align-items:flex-start; border:1px solid var(--ink); border-radius:18px; padding:14px 18px; font-size:15px; max-width:72ch; }
+.wdot { width:10px; height:10px; border-radius:50%; background:var(--orange); flex:none; margin-top:6px; }
 .note { margin:14px 0 0; font-size:14px; color:var(--mute); max-width:70ch; }
 
 .needs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 40px; margin:0; padding:0; list-style:none; }
@@ -91,7 +93,7 @@ footer { border-top:1px solid var(--ink); padding:22px 0 40px; font-size:13px; c
             <span class="dot"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10m0 0 4-4m-4 4-4-4M4 17h12" stroke="#1A1C1B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             Download for Mac
           </a>
-          <span class="meta">Apple Silicon (M1 or newer) · macOS 13+ · 127 MB</span>
+          <span class="meta">Apple Silicon (M1 or newer) · macOS 13+ · 127 MB · then follow the three steps below</span>
         </div>
       </div>
       <div class="disc" aria-hidden="true">
@@ -103,13 +105,14 @@ footer { border-top:1px solid var(--ink); padding:22px 0 40px; font-size:13px; c
       <h2>Install in three steps</h2>
       <ol class="steps">
         <li><div class="num">1</div><h3>Download</h3><p>Press Download for Mac and wait for <b>VIGE-mac-arm64.dmg</b> to finish.</p></li>
-        <li><div class="num">2</div><h3>Drag to Applications</h3><p>Open the downloaded file and drag VIGE onto the Applications folder next to it.</p></li>
-        <li><div class="num">3</div><h3>Finish setup</h3><p>Open the Terminal app, paste the command below and press Return. It sets up everything VIGE needs and opens the app.</p></li>
+        <li><div class="num">2</div><h3>Drag to Applications</h3><p>Open the downloaded file and drag VIGE onto the Applications folder next to it. <b>Do not open VIGE yet.</b></p></li>
+        <li><div class="num">3</div><h3>Run setup, then VIGE opens</h3><p>Open the Terminal app, paste the command below and press Return. It sets up everything VIGE needs and opens the app for you.</p></li>
       </ol>
       <div class="cmd">
         <code id="cmd">curl -fsSL https://verve2026.github.io/vige/install.sh | bash -s -- --setup-only</code>
         <button class="copy" id="copy" type="button">Copy</button>
       </div>
+      <p class="warn"><span class="wdot" aria-hidden="true"></span><span><b>Run this before you open VIGE.</b> If you open the app first, macOS shows “VIGE Not Opened”. Press Done on that message, then run the command.</span></p>
       <p class="note">Setup downloads the 1.6 GB speech model once and adds ffmpeg and whisper through Homebrew, so the first run takes a while. It never asks for your Mac password.</p>
     </section>
 
@@ -126,8 +129,8 @@ footer { border-top:1px solid var(--ink); padding:22px 0 40px; font-size:13px; c
     <section>
       <h2>Questions</h2>
       <details>
-        <summary>macOS says VIGE cannot be opened</summary>
-        <p>That happens when step 3 was skipped. Run the command in step 3, or open System Settings, go to Privacy &amp; Security, scroll down and press Open Anyway next to VIGE.</p>
+        <summary>macOS says “VIGE Not Opened”</summary>
+        <p>That happens when VIGE is opened before step 3. Press Done, then run the command in step 3; it clears the block and opens the app. Without Terminal: open System Settings, go to Privacy &amp; Security, scroll down and press Open Anyway next to VIGE. That only opens the app, so you still need step 3 before you can create videos.</p>
       </details>
       <details>
         <summary>Can I install with one command instead?</summary>
