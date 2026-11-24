@@ -36,6 +36,13 @@ h1 em { font-style:normal; color:var(--orange); }
 .btn:focus-visible, .copy:focus-visible { outline:2px solid var(--orange); outline-offset:3px; }
 .meta { font-size:13.5px; color:var(--mute); font-weight:500; }
 
+.invite { margin-top:28px; border:1px solid var(--ink); border-radius:26px; padding:20px 24px; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:20px 28px; align-items:center; }
+.invite[hidden] { display:none; }
+.invite-l { display:block; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); }
+.invite-c { display:block; font-weight:900; font-size:clamp(30px,5vw,46px); letter-spacing:.02em; line-height:1.05; font-variant-numeric:tabular-nums; }
+.invite p { margin:0; font-size:15px; max-width:56ch; }
+.invite-b { border-radius:999px; height:48px; }
+@media (max-width:760px) { .invite { grid-template-columns:minmax(0,1fr); } .invite-b { justify-self:start; } }
 .disc { aspect-ratio:1; width:100%; max-width:380px; justify-self:end; border-radius:50%; background:var(--grey); display:grid; place-items:center; position:relative; }
 .disc svg { width:72%; height:72%; }
 .disc::after { content:""; position:absolute; width:22%; aspect-ratio:1; border-radius:50%; background:var(--orange); right:2%; top:6%; }
@@ -84,6 +91,14 @@ footer { border-top:1px solid var(--ink); padding:22px 0 40px; font-size:13px; c
   </header>
 
   <main>
+    <div class="invite" id="invite" hidden>
+      <div>
+        <span class="invite-l">You are invited to a VIGE team</span>
+        <span class="invite-c" id="invite-code"></span>
+      </div>
+      <p>Install VIGE below, press <b>Create account</b>, and type this team code. Your team lead will see your calendar and drafts; your videos stay on your Mac.</p>
+      <button class="copy invite-b" id="invite-copy" type="button">Copy code</button>
+    </div>
     <div class="hero">
       <div>
         <h1>Raw video in. <em>TikTok</em> out.</h1>
@@ -154,6 +169,17 @@ footer { border-top:1px solid var(--ink); padding:22px 0 40px; font-size:13px; c
 </div>
 <script>
 (function () {
+  // An invite link looks like ?team=ABCD-2345. Only letters, digits and a dash are ever shown.
+  var m = /[?&]team=([A-Za-z0-9-]{4,12})(?:&|$)/.exec(location.search);
+  if (m) {
+    var code = m[1].toUpperCase(), box = document.getElementById('invite'), ib = document.getElementById('invite-copy');
+    document.getElementById('invite-code').textContent = code;
+    box.hidden = false;
+    ib.addEventListener('click', function () {
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(code).then(function () { ib.textContent = 'Copied'; setTimeout(function () { ib.textContent = 'Copy code'; }, 1600); }, function () {});
+    });
+  }
   var b = document.getElementById('copy'), c = document.getElementById('cmd');
   b.addEventListener('click', function () {
     var t = c.textContent;
